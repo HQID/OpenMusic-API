@@ -41,7 +41,18 @@ class AlbumService {
     if (!result.rows.length) {
       throw new NotFoundError('Album tidak ditemukan');
     }
-    return result.rows[0];
+
+    const songsQuery = {
+      text: 'SELECT id, title, performer FROM songs WHERE album_id = $1',
+      values: [id],
+    };
+    const songsResult = await this._pool.query(songsQuery);
+    const album = result.rows[0];
+
+    return {
+      ...album,
+      songs: songsResult.rows,
+    };
   }
 
   async editAlbumById(id, { name, year }) {

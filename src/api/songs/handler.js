@@ -27,12 +27,22 @@ class SongsHandler {
     return response;
   };
 
-  getSongsHandler = async () => {
+  getSongsHandler = async (request) => {
+    const { title = '', performer = '' } = request.query;
     const songs = await this._service.getSongs();
+
+    const filteredSongs = songs.filter((song) => {
+      const matchTitle = title ? song.title.toLowerCase().includes(title.toLowerCase()) : true;
+      const matchPerformer = performer
+        ? song.performer.toLowerCase().includes(performer.toLowerCase())
+        : true;
+      return matchTitle && matchPerformer;
+    });
+
     return {
       status: 'success',
       data: {
-        songs,
+        songs: filteredSongs,
       },
     };
   };
