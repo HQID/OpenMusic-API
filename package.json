@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start:dev": "nodemon src/server.js",
+    "start": "nodemon src/server.js",
     "migrate": "node-pg-migrate"
   },
   "keywords": [],
@@ -13,6 +13,8 @@
   "license": "ISC",
   "dependencies": {
     "@hapi/hapi": "^21.4.3",
+    "@hapi/jwt": "^3.2.1",
+    "bcrypt": "^6.0.0",
     "dotenv": "^17.2.3",
     "joi": "^18.0.1",
     "nanoid": "^5.1.6",
@@ -21,6 +23,7 @@
   },
   "devDependencies": {
     "eslint": "^9.38.0",
+    "eslint-config-dicodingacademy": "^0.9.5",
     "globals": "^16.4.0",
     "nodemon": "^3.1.10"
   }
